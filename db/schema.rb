@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 2018_11_01_145938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", default: "", null: false
     t.string "description"
     t.datetime "remind_at"

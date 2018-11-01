@@ -1,9 +1,10 @@
 class CreateEvents < ActiveRecord::Migration[5.2]
+  enable_extension 'uuid-ossp'
   enable_extension 'pgcrypto'
   disable_ddl_transaction!
 
   def change
-    create_table :events do |t|
+    create_table :events, id: :uuid do |t|
       t.string   :title,              default: '', null: false
       t.string   :description
       t.datetime :remind_at
